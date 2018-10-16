@@ -26,10 +26,10 @@ def main():
     aws_session = boto3.Session(
         aws_access_key_id=aws_credential['aws_access_key_id'],
         aws_secret_access_key=aws_credential['aws_secret_access_key'],
-        region_name=config['aws']['region_queues']
+        region_name=aws_credential['default_region']
     )
     sqs = aws_session.resource('sqs')
-    logging.info('Connected to AWS in %s', aws_credential['region_name'])
+    logging.info('Connected to AWS in %s', aws_credential['default_region'])
 
     # Connect to queue for Twitter credentials.
     credentials_queue = sqs.get_queue_by_name(QueueName='watson_credentials')
